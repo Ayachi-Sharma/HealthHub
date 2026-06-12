@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🏥 MediPay - Healthcare Appointment & Payment Platform
 
 [![Phase](https://img.shields.io/badge/Phase-4%20Complete-success)](https://github.com/yourusername/medipay)
@@ -393,3 +394,6 @@ For questions or collaboration:
 **Built with ❤️ as a comprehensive full-stack healthcare platform**
 
 **Current Status**: Phase 4 Complete | Patient Module Working ✅
+=======
+# HealthHub
+>>>>>>> aa223e1ff8638575e7ecd6a6030b4ab7f6e8acd8
