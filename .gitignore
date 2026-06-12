@@ -1,0 +1,89 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE Files
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+.project
+.classpath
+.settings/
+*.code-workspace
+
+# Backend (Spring Boot / Maven)
+medipay-backend/target/
+medipay-backend/.mvn/
+medipay-backend/mvnw
+medipay-backend/mvnw.cmd
+medipay-backend/HELP.md
+medipay-backend/.apt_generated
+medipay-backend/.factorypath
+medipay-backend/.springBeans
+medipay-backend/.sts4-cache
+
+# Frontend (React / Node) - for future phases
+medipay-frontend/node_modules/
+medipay-frontend/build/
+medipay-frontend/dist/
+medipay-frontend/.env
+medipay-frontend/.env.local
+medipay-frontend/.env.production
+medipay-frontend/.env.development
+medipay-frontend/npm-debug.log*
+medipay-frontend/yarn-debug.log*
+medipay-frontend/yarn-error.log*
+medipay-frontend/.pnp
+medipay-frontend/.pnp.js
+
+# Environment Variables & Sensitive Files
+*.env
+.env.local
+.env.production
+.env.development
+application-local.properties
+application-prod.properties
+
+# Logs
+*.log
+logs/
+log/
+
+# Database
+*.sql
+*.sqlite
+*.db
+
+# Compiled Files
+*.class
+*.jar
+*.war
+*.ear
+
+# Package Files
+*.zip
+*.tar.gz
+*.rar
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Test Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Build artifacts
+build/
+out/
+
+# Dependencies
+.gradle/
+gradle/

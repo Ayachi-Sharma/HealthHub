@@ -1,0 +1,70 @@
+┌─────────────┐         ┌─────────────┐         ┌─────────────┐
+│    ROLE     │         │    USER     │         │   PATIENT   │
+├─────────────┤         ├─────────────┤         ├─────────────┤
+│ id (PK)     │◄───┐    │ id (PK)     │    ┌───►│ id (PK)     │
+│ name        │    └────│ role_id(FK) │    │    │ user_id(FK) │
+│ created_at  │         │ email       │    │    │ phone       │
+└─────────────┘         │ password    │    │    │ address     │
+                        │ is_active   │    │    │ dob         │
+                        │ created_at  │    │    │ gender      │
+                        └──────┬──────┘    │    │ blood_group │
+                               │           │    │ created_at  │
+                               │           │    └──────┬──────┘
+                               │           │           │
+                        ┌──────▼──────┐    │           │
+                        │   DOCTOR    │    │           │
+                        ├─────────────┤    │           │
+                        │ id (PK)     │────┘           │
+                        │ user_id(FK) │                │
+                        │ specialization              │
+                        │ experience  │                │
+                        │ qualification                │
+                        │ consultation_fee             │
+                        │ bio         │                │
+                        │ is_approved │                │
+                        │ created_at  │                │
+                        └──────┬──────┘                │
+                               │                       │
+                               │                       │
+                        ┌──────▼───────────────────────▼──────┐
+                        │        APPOINTMENT                  │
+                        ├─────────────────────────────────────┤
+                        │ id (PK)                             │
+                        │ patient_id (FK)                     │
+                        │ doctor_id (FK)                      │
+                        │ appointment_date                    │
+                        │ appointment_time                    │
+                        │ status (PENDING/APPROVED/REJECTED)  │
+                        │ reason                              │
+                        │ is_paid                             │
+                        │ created_at                          │
+                        └──────┬──────────────────────────────┘
+                               │
+                               │
+                        ┌──────▼──────┐
+                        │   PAYMENT   │
+                        ├─────────────┤
+                        │ id (PK)     │
+                        │ appointment_id (FK)
+                        │ patient_id (FK)
+                        │ doctor_id (FK)
+                        │ amount      │
+                        │ razorpay_order_id
+                        │ razorpay_payment_id
+                        │ razorpay_signature
+                        │ status      │
+                        │ payment_date│
+                        │ created_at  │
+                        └─────────────┘
+
+┌─────────────┐
+│TIME_SLOT    │
+├─────────────┤
+│ id (PK)     │
+│ doctor_id(FK)
+│ slot_date   │
+│ start_time  │
+│ end_time    │
+│ is_available│
+│ created_at  │
+└─────────────┘

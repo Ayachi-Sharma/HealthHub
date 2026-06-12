@@ -1,0 +1,23 @@
+┌─────────────────────────────────────────────────────────────┐
+│                     PRESENTATION LAYER                       │
+│  React.js + Tailwind CSS + React Router + Context API       │
+│  (Deployed on Vercel)                                        │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ HTTP/REST + JWT
+                       │
+┌──────────────────────▼──────────────────────────────────────┐
+│                     APPLICATION LAYER                       │
+│  Spring Boot REST APIs + JWT Security + Business Logic      │
+│  (Deployed on Render/Railway)                               │
+└──────────────────────┬──────────────────────────────────────┘
+                       │ JPA/Hibernate
+                       │
+┌──────────────────────▼──────────────────────────────────────┐
+│                       DATA LAYER                             │
+│  MySQL Database + Spring Data JPA Repositories              │
+└─────────────────────────────────────────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────────────────┐
+│                   EXTERNAL SERVICES                          │
+│  Razorpay Payment Gateway Integration                       │
+└─────────────────────────────────────────────────────────────┘

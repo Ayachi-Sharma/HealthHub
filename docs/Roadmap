@@ -1,0 +1,73 @@
+Phase 1: Idea Documenting 
+Requirement Analysis
+System Architecture
+Database Design
+ER Diagram
+Folder Structure
+
+Phase 2: Backend Core Setup
+Spring Boot project initialization
+Database configuration
+Entity classes creation
+Repository layer
+
+Phase 3: Authentication & Security
+JWT implementation
+Spring Security configuration
+User registration & login
+Role-based authorization
+
+Phase 4: Patient Module
+Patient profile management
+Doctor search & listing
+Appointment booking
+
+Phase 5: Doctor Module
+Doctor profile management
+Time slot management
+Appointment management
+
+Phase 6: Payment Integration
+Razorpay integration
+Payment order creation
+Payment verification
+Payment history
+
+Phase 7: Admin Module
+Admin dashboard
+User management
+Analytics
+
+Phase 8: Frontend Setup
+React app initialization
+Routing setup
+Context API setup
+Tailwind CSS configuration
+
+Phase 9: Frontend Authentication
+Login/Register pages
+Protected routes
+Auth context
+
+Phase 10: Frontend Patient Module
+Patient dashboard
+Doctor listing
+Appointment booking UI
+
+Phase 11: Frontend Doctor Module
+Doctor dashboard
+Slot management UI
+Appointment management UI
+
+Phase 12: Frontend Admin Module
+Admin dashboard
+Management panels
+
+Phase 13: Payment UI
+Razorpay integration
+Payment success/failure pages
+
+Phase 14: Testing & Deployment
+Backend deployment (Render/Railway)
+Frontend deployment (Vercel)
+Integration testing

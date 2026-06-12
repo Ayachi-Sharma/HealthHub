@@ -1,0 +1,65 @@
+┌─────────────┐
+│   CLIENT    │
+└──────┬──────┘
+       │
+       │ 1. Login Request (email, password)
+       ▼
+┌────────────────────────┐
+│  AuthController        │
+│  /api/auth/login       │
+└──────┬─────────────────┘
+       │ 2. Validate Credentials
+       ▼
+┌────────────────────────┐
+│  AuthService           │
+│  - Check user exists   │
+│  - Verify password     │
+└──────┬─────────────────┘
+       │ 3. Generate JWT
+       ▼
+┌────────────────────────┐
+│  JwtService            │
+│  - Create access token │
+│  - Create refresh token│
+└──────┬─────────────────┘
+       │ 4. Return tokens + user info
+       ▼
+┌────────────────────────┐
+│  Client stores JWT     │
+└────────────────────────┘
+
+SUBSEQUENT API CALLS:
+┌─────────────┐
+│   CLIENT    │
+└──────┬──────┘
+       │ Request + JWT in Authorization Header
+       ▼
+┌────────────────────────────┐
+│ JwtAuthenticationFilter    │
+│ - Extract JWT              │
+│ - Validate signature       │
+│ - Check expiration         │
+└──────┬─────────────────────┘
+       │ Valid JWT
+       ▼
+┌────────────────────────────┐
+│ Controller                 │
+│ (Patient/Doctor/Admin)     │
+└──────┬─────────────────────┘
+       │
+       ▼
+┌────────────────────────────┐
+│ Service Layer              │
+│ - Business Logic           │
+└──────┬─────────────────────┘
+       │
+       ▼
+┌────────────────────────────┐
+│ Repository Layer           │
+│ - Database Operations      │
+└──────┬─────────────────────┘
+       │
+       ▼
+┌────────────────────────────┐
+│ MySQL Database             │
+└────────────────────────────┘

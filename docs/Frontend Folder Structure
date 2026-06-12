@@ -1,0 +1,74 @@
+medipay-frontend/
+├── public/
+│   ├── index.html
+│   └── favicon.ico
+├── src/
+│   ├── App.js
+│   ├── index.js
+│   ├── assets/
+│   │   ├── images/
+│   │   └── icons/
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Loader.jsx
+│   │   │   ├── Modal.jsx
+│   │   │   └── ProtectedRoute.jsx
+│   │   ├── auth/
+│   │   │   ├── Login.jsx
+│   │   │   ├── PatientRegister.jsx
+│   │   │   └── DoctorRegister.jsx
+│   │   ├── patient/
+│   │   │   ├── PatientDashboard.jsx
+│   │   │   ├── DoctorList.jsx
+│   │   │   ├── DoctorProfile.jsx
+│   │   │   ├── BookAppointment.jsx
+│   │   │   ├── AppointmentHistory.jsx
+│   │   │   ├── PaymentHistory.jsx
+│   │   │   └── PatientProfile.jsx
+│   │   ├── doctor/
+│   │   │   ├── DoctorDashboard.jsx
+│   │   │   ├── DoctorProfileSetup.jsx
+│   │   │   ├── ManageSlots.jsx
+│   │   │   ├── AppointmentList.jsx
+│   │   │   ├── Earnings.jsx
+│   │   │   └── DoctorProfileEdit.jsx
+│   │   ├── admin/
+│   │   │   ├── AdminDashboard.jsx
+│   │   │   ├── ManagePatients.jsx
+│   │   │   ├── ManageDoctors.jsx
+│   │   │   ├── ManageAppointments.jsx
+│   │   │   ├── Analytics.jsx
+│   │   │   └── Revenue.jsx
+│   │   └── payment/
+│   │       ├── PaymentGateway.jsx
+│   │       ├── PaymentSuccess.jsx
+│   │       └── PaymentFailure.jsx
+│   ├── context/
+│   │   ├── AuthContext.js
+│   │   └── AppContext.js
+│   ├── services/
+│   │   ├── api.js
+│   │   ├── authService.js
+│   │   ├── patientService.js
+│   │   ├── doctorService.js
+│   │   ├── appointmentService.js
+│   │   ├── paymentService.js
+│   │   └── adminService.js
+│   ├── utils/
+│   │   ├── constants.js
+│   │   ├── helpers.js
+│   │   └── validators.js
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   └── useApi.js
+│   └── routes/
+│       └── AppRoutes.jsx
+├── .env
+├── .env.example
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
