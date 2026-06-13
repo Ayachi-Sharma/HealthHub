@@ -1,7 +1,7 @@
 package com.medipay.repository;
 
 import com.medipay.entity.Appointment;
-import com.medipay.entity.Appointment.AppointmentStatus;
+import com.medipay.entity.AppointmentStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -33,4 +33,14 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Long countCompletedAppointmentsByDoctor(@Param("doctorId") Long doctorId);
     
     Long countByStatus(AppointmentStatus status);
+    
+    // Admin queries
+    List<Appointment> findAllByOrderByAppointmentDateDescAppointmentTimeDesc();
+    List<Appointment> findByAppointmentDate(LocalDate date);
+    List<Appointment> findByPatientOrderByAppointmentDateDescAppointmentTimeDesc(com.medipay.entity.Patient patient);
+    List<Appointment> findByDoctorOrderByAppointmentDateDescAppointmentTimeDesc(com.medipay.entity.Doctor doctor);
+    List<Appointment> findByDoctorAndAppointmentDate(com.medipay.entity.Doctor doctor, LocalDate date);
+    List<Appointment> findByDoctorAndAppointmentDateAfterAndStatus(com.medipay.entity.Doctor doctor, LocalDate date, AppointmentStatus status);
+    Long countByDoctor(com.medipay.entity.Doctor doctor);
+    Long countByDoctorAndStatus(com.medipay.entity.Doctor doctor, AppointmentStatus status);
 }

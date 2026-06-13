@@ -16,7 +16,13 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
     Optional<Doctor> findByUserEmail(String email);
     List<Doctor> findByIsApprovedTrue();
     List<Doctor> findByIsApprovedFalse();
+    List<Doctor> findByIsApproved(Boolean isApproved);
     
     @Query("SELECT d FROM Doctor d WHERE d.isApproved = true AND LOWER(d.specialization) LIKE LOWER(CONCAT('%', :specialization, '%'))")
     List<Doctor> findBySpecializationContainingIgnoreCase(@Param("specialization") String specialization);
+    
+    // Admin queries
+    List<Doctor> findAllByOrderByCreatedAtDesc();
+    Long countByIsApproved(Boolean isApproved);
+}
 }
