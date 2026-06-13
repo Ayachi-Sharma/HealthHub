@@ -1,5 +1,6 @@
 package com.medipay.controller;
 
+import com.medipay.dto.request.AppointmentBookingRequest;
 import com.medipay.dto.request.PatientUpdateRequest;
 import com.medipay.dto.response.ApiResponse;
 import com.medipay.dto.response.DoctorResponse;
@@ -112,5 +113,38 @@ public class PatientController {
                 .build();
         
         return ResponseEntity.ok(response);
+    }
+}
+
+    // ==================== Appointment Management ====================
+
+    @PostMapping("/appointments/book")
+    public ResponseEntity<ApiResponse> bookAppointment(@Valid @RequestBody AppointmentBookingRequest request) {
+        return ResponseEntity.ok(
+                ApiResponse.success("Appointment booked successfully", patientService.bookAppointment(request))
+        );
+    }
+
+    @GetMapping("/appointments")
+    public ResponseEntity<ApiResponse> getMyAppointments() {
+        return ResponseEntity.ok(
+                ApiResponse.success("Appointments retrieved successfully", patientService.getMyAppointments())
+        );
+    }
+
+    @GetMapping("/appointments/{appointmentId}")
+    public ResponseEntity<ApiResponse> getAppointmentById(@PathVariable Long appointmentId) {
+        return ResponseEntity.ok(
+                ApiResponse.success("Appointment retrieved successfully", 
+                        patientService.getAppointmentById(appointmentId))
+        );
+    }
+
+    @PutMapping("/appointments/{appointmentId}/cancel")
+    public ResponseEntity<ApiResponse> cancelAppointment(@PathVariable Long appointmentId) {
+        return ResponseEntity.ok(
+                ApiResponse.success("Appointment cancelled successfully", 
+                        patientService.cancelAppointment(appointmentId))
+        );
     }
 }

@@ -1,7 +1,7 @@
 # MediPay - Progress Tracker
 
-**Last Updated**: Phase 5 Completion  
-**Overall Progress**: 36% (5/14 phases)
+**Last Updated**: Phase 6 Completion  
+**Overall Progress**: 43% (6/14 phases)
 
 ---
 
@@ -14,7 +14,7 @@
 | Phase 3 | ✅ | 13 files | ~1,400 | Day 1 |
 | Phase 4 | ✅ | 6 files | ~600 | Day 1 |
 | Phase 5 | ✅ | 10 files | ~900 | Day 1 |
-| Phase 6 | ⏳ | - | - | Pending |
+| Phase 6 | ✅ | 8 files | ~900 | Day 1 |
 | Phase 7 | ⏳ | - | - | Pending |
 | Phase 8 | ⏳ | - | - | Pending |
 | Phase 9 | ⏳ | - | - | Pending |
@@ -108,16 +108,16 @@
 ## 📈 Cumulative Statistics
 
 ### Backend Development
-- **Total Files**: 53 Java files
-- **Total LOC**: ~4,750 lines
+- **Total Files**: 61 Java files
+- **Total LOC**: ~5,650 lines
 - **Packages**: 8 packages
 - **Entities**: 7 entities
 - **Repositories**: 7 repositories
-- **Services**: 4 services
-- **Controllers**: 3 controllers
-- **DTOs**: 16 DTOs
-- **Config Files**: 4 config classes
-- **API Endpoints**: 29 endpoints
+- **Services**: 5 services
+- **Controllers**: 4 controllers
+- **DTOs**: 20 DTOs
+- **Config Files**: 5 config classes
+- **API Endpoints**: 38 endpoints
 
 ### Documentation
 - **Design Docs**: 7 files
@@ -127,9 +127,9 @@
 - **Total Docs**: 22 files
 
 ### Overall Project
-- **Total Files**: 81 files (code + docs)
-- **Phases Complete**: 5/14 (36%)
-- **Backend Progress**: 65% (patient + doctor modules done)
+- **Total Files**: 91 files (code + docs)
+- **Phases Complete**: 6/14 (43%)
+- **Backend Progress**: 80% (payment integration done)
 - **Frontend Progress**: 0% (starts Phase 8)
 
 ---
@@ -237,21 +237,57 @@
 
 ---
 
-## 🔄 Next Phase: Phase 6 - Payment Integration
+### Phase 6: Payment Integration
+**Status**: ✅ Complete  
+**Deliverables**: 8 files (~900 LOC)
+
+**What Was Built**:
+- Razorpay configuration and SDK integration
+- Payment service with 7 methods
+- Payment controller with 5 endpoints
+- 4 DTOs (2 request, 2 response)
+- Enhanced patient service with booking (4 methods)
+- Enhanced patient controller (4 endpoints)
+- Appointment booking workflow
+- Payment order creation & verification
+
+**API Endpoints Available**:
+- POST `/api/payment/order/{id}` - Create payment order
+- POST `/api/payment/verify` - Verify payment
+- GET `/api/payment/history` - Get payment history
+- GET `/api/payment/{id}` - Get payment by ID
+- GET `/api/payment/appointment/{id}` - Get payment by appointment
+- POST `/api/patient/appointments/book` - Book appointment
+- GET `/api/patient/appointments` - Get all appointments
+- GET `/api/patient/appointments/{id}` - Get appointment by ID
+- PUT `/api/patient/appointments/{id}/cancel` - Cancel appointment
+
+**Features**:
+- Razorpay order creation with API
+- HMAC-SHA256 signature verification
+- Payment status tracking (PENDING/SUCCESS/FAILED)
+- Appointment booking with validation
+- Time slot availability check
+- Automatic slot release on cancellation
+- Ownership verification on all operations
+
+---
+
+## 🔄 Next Phase: Phase 7 - Admin Module
 
 ### Planned Deliverables
-- Razorpay integration
-- Payment order creation
-- Payment verification
-- Payment history
-- Transaction records
-- Refund handling
+- Admin dashboard with analytics
+- User management (view/suspend)
+- Doctor approval workflow
+- System-wide statistics
+- Patient and doctor listings
+- Admin service & controller
 
 ### Estimated Files
-- PaymentService.java
-- PaymentController.java
-- Payment DTOs
-- Razorpay configuration
+- AdminService.java
+- AdminController.java
+- Admin DTOs
+- Dashboard response
 - ~6-8 new files
 
 ---
@@ -405,10 +441,10 @@ To continue development:
 4. Check database seeding
 5. Start Phase 4 - Patient Module
 
-**Command to start Phase 6**: Type "phase 6" or "move to phase 6"
+**Command to start Phase 7**: Type "phase 7" or "move to phase 7"
 
 ---
 
-**Current Status**: Phase 5 Complete ✅  
-**Next Phase**: Phase 6 - Payment Integration 🔄  
-**Progress**: 36% Complete (5/14 phases)
+**Current Status**: Phase 6 Complete ✅  
+**Next Phase**: Phase 7 - Admin Module 🔄  
+**Progress**: 43% Complete (6/14 phases)
