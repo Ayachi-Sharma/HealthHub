@@ -580,3 +580,657 @@ curl http://localhost:8080/api/patient/dashboard \
 - Appointment booking endpoints (Phase 4-5)
 - Payment endpoints (Phase 6)
 - Admin endpoints (Phase 7)
+
+
+---
+
+## Doctor Module Endpoints
+
+### 1. Get Doctor Profile
+**GET** `/api/doctor/profile`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Profile retrieved successfully",
+  "data": {
+    "doctorId": 1,
+    "userId": 2,
+    "fullName": "Dr. Sarah Smith",
+    "email": "sarah.doctor@example.com",
+    "phone": "9876543211",
+    "specialization": "Cardiologist",
+    "experience": 10,
+    "qualification": "MBBS, MD (Cardiology)",
+    "consultationFee": 500.00,
+    "bio": "Experienced cardiologist with 10+ years of practice",
+    "isApproved": true,
+    "createdAt": "2026-06-11T10:00:00"
+  },
+  "timestamp": "2026-06-11T10:35:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/profile \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 2. Update Doctor Profile
+**PUT** `/api/doctor/profile`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+Content-Type: application/json
+```
+
+**Request Body (all fields optional):**
+```json
+{
+  "fullName": "Dr. Sarah Johnson",
+  "phone": "9876543222",
+  "specialization": "Senior Cardiologist",
+  "experience": 12,
+  "consultationFee": 600.00,
+  "bio": "Senior cardiologist with 12+ years of practice"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Profile updated successfully",
+  "data": {
+    "doctorId": 1,
+    "userId": 2,
+    "fullName": "Dr. Sarah Johnson",
+    "email": "sarah.doctor@example.com",
+    "phone": "9876543222",
+    "specialization": "Senior Cardiologist",
+    "experience": 12,
+    "qualification": "MBBS, MD (Cardiology)",
+    "consultationFee": 600.00,
+    "bio": "Senior cardiologist with 12+ years of practice",
+    "isApproved": true,
+    "createdAt": "2026-06-11T10:00:00"
+  },
+  "timestamp": "2026-06-11T10:36:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X PUT http://localhost:8080/api/doctor/profile \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "specialization": "Senior Cardiologist",
+    "experience": 12,
+    "consultationFee": 600.00
+  }'
+```
+
+---
+
+### 3. Create Time Slot
+**POST** `/api/doctor/slots`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+Content-Type: application/json
+```
+
+**Request Body:**
+```json
+{
+  "date": "2026-06-20",
+  "startTime": "09:00:00",
+  "endTime": "10:00:00"
+}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Time slot created successfully",
+  "data": {
+    "slotId": 1,
+    "doctorId": 1,
+    "date": "2026-06-20",
+    "startTime": "09:00:00",
+    "endTime": "10:00:00",
+    "isBooked": false
+  },
+  "timestamp": "2026-06-11T10:37:00"
+}
+```
+
+**Error Response (400 Bad Request - Overlapping Slot):**
+```json
+{
+  "success": false,
+  "message": "Time slot overlaps with existing slot",
+  "timestamp": "2026-06-11T10:37:00"
+}
+```
+
+**Error Response (400 Bad Request - Not Approved):**
+```json
+{
+  "success": false,
+  "message": "Your profile is not approved yet. Please wait for admin approval.",
+  "timestamp": "2026-06-11T10:37:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X POST http://localhost:8080/api/doctor/slots \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "date": "2026-06-20",
+    "startTime": "09:00:00",
+    "endTime": "10:00:00"
+  }'
+```
+
+---
+
+### 4. Get All Time Slots
+**GET** `/api/doctor/slots`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Time slots retrieved successfully",
+  "data": [
+    {
+      "slotId": 1,
+      "doctorId": 1,
+      "date": "2026-06-20",
+      "startTime": "09:00:00",
+      "endTime": "10:00:00",
+      "isBooked": false
+    },
+    {
+      "slotId": 2,
+      "doctorId": 1,
+      "date": "2026-06-20",
+      "startTime": "10:00:00",
+      "endTime": "11:00:00",
+      "isBooked": true
+    }
+  ],
+  "timestamp": "2026-06-11T10:38:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/slots \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 5. Get Available Slots by Date
+**GET** `/api/doctor/slots/available?date={date}`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Query Parameters:**
+- `date` (required): Date in format YYYY-MM-DD
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Available slots retrieved successfully",
+  "data": [
+    {
+      "slotId": 1,
+      "doctorId": 1,
+      "date": "2026-06-20",
+      "startTime": "09:00:00",
+      "endTime": "10:00:00",
+      "isBooked": false
+    }
+  ],
+  "timestamp": "2026-06-11T10:39:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET "http://localhost:8080/api/doctor/slots/available?date=2026-06-20" \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 6. Delete Time Slot
+**DELETE** `/api/doctor/slots/{slotId}`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Path Parameters:**
+- `slotId`: ID of the time slot to delete
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Time slot deleted successfully",
+  "data": null,
+  "timestamp": "2026-06-11T10:40:00"
+}
+```
+
+**Error Response (400 Bad Request - Booked Slot):**
+```json
+{
+  "success": false,
+  "message": "Cannot delete a booked time slot",
+  "timestamp": "2026-06-11T10:40:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X DELETE http://localhost:8080/api/doctor/slots/1 \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 7. Get All Appointments
+**GET** `/api/doctor/appointments`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Appointments retrieved successfully",
+  "data": [
+    {
+      "appointmentId": 1,
+      "patientId": 1,
+      "patientName": "John Doe",
+      "patientEmail": "john.patient@example.com",
+      "patientPhone": "9876543210",
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Smith",
+      "specialization": "Cardiologist",
+      "appointmentDate": "2026-06-20",
+      "appointmentTime": "09:00:00",
+      "status": "PENDING",
+      "notes": null,
+      "createdAt": "2026-06-11T10:00:00"
+    }
+  ],
+  "timestamp": "2026-06-11T10:41:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/appointments \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 8. Get Today's Appointments
+**GET** `/api/doctor/appointments/today`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Today's appointments retrieved successfully",
+  "data": [
+    {
+      "appointmentId": 2,
+      "patientId": 2,
+      "patientName": "Jane Smith",
+      "patientEmail": "jane@example.com",
+      "patientPhone": "9876543211",
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Smith",
+      "specialization": "Cardiologist",
+      "appointmentDate": "2026-06-11",
+      "appointmentTime": "14:00:00",
+      "status": "APPROVED",
+      "notes": null,
+      "createdAt": "2026-06-10T08:00:00"
+    }
+  ],
+  "timestamp": "2026-06-11T10:42:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/appointments/today \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 9. Get Upcoming Appointments
+**GET** `/api/doctor/appointments/upcoming`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Upcoming appointments retrieved successfully",
+  "data": [
+    {
+      "appointmentId": 3,
+      "patientId": 1,
+      "patientName": "John Doe",
+      "patientEmail": "john.patient@example.com",
+      "patientPhone": "9876543210",
+      "doctorId": 1,
+      "doctorName": "Dr. Sarah Smith",
+      "specialization": "Cardiologist",
+      "appointmentDate": "2026-06-20",
+      "appointmentTime": "09:00:00",
+      "status": "APPROVED",
+      "notes": "Regular checkup",
+      "createdAt": "2026-06-11T10:00:00"
+    }
+  ],
+  "timestamp": "2026-06-11T10:43:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/appointments/upcoming \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 10. Get Appointment by ID
+**GET** `/api/doctor/appointments/{appointmentId}`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Path Parameters:**
+- `appointmentId`: ID of the appointment
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Appointment retrieved successfully",
+  "data": {
+    "appointmentId": 1,
+    "patientId": 1,
+    "patientName": "John Doe",
+    "patientEmail": "john.patient@example.com",
+    "patientPhone": "9876543210",
+    "doctorId": 1,
+    "doctorName": "Dr. Sarah Smith",
+    "specialization": "Cardiologist",
+    "appointmentDate": "2026-06-20",
+    "appointmentTime": "09:00:00",
+    "status": "PENDING",
+    "notes": null,
+    "createdAt": "2026-06-11T10:00:00"
+  },
+  "timestamp": "2026-06-11T10:44:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/appointments/1 \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+### 11. Update Appointment Status
+**PUT** `/api/doctor/appointments/{appointmentId}/status`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+Content-Type: application/json
+```
+
+**Path Parameters:**
+- `appointmentId`: ID of the appointment
+
+**Request Body:**
+```json
+{
+  "status": "APPROVED",
+  "notes": "Appointment confirmed for regular checkup"
+}
+```
+
+**Possible Status Values:**
+- `PENDING`
+- `APPROVED`
+- `COMPLETED`
+- `CANCELLED`
+- `REJECTED`
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Appointment status updated successfully",
+  "data": {
+    "appointmentId": 1,
+    "patientId": 1,
+    "patientName": "John Doe",
+    "patientEmail": "john.patient@example.com",
+    "patientPhone": "9876543210",
+    "doctorId": 1,
+    "doctorName": "Dr. Sarah Smith",
+    "specialization": "Cardiologist",
+    "appointmentDate": "2026-06-20",
+    "appointmentTime": "09:00:00",
+    "status": "APPROVED",
+    "notes": "Appointment confirmed for regular checkup",
+    "createdAt": "2026-06-11T10:00:00"
+  },
+  "timestamp": "2026-06-11T10:45:00"
+}
+```
+
+**Error Response (400 Bad Request - Invalid Transition):**
+```json
+{
+  "success": false,
+  "message": "Cannot update status of completed appointment",
+  "timestamp": "2026-06-11T10:45:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X PUT http://localhost:8080/api/doctor/appointments/1/status \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "status": "APPROVED",
+    "notes": "Appointment confirmed for regular checkup"
+  }'
+```
+
+---
+
+### 12. Get Doctor Dashboard
+**GET** `/api/doctor/dashboard`
+
+**Headers:**
+```
+Authorization: Bearer {doctorAccessToken}
+```
+
+**Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "Dashboard data retrieved successfully",
+  "data": {
+    "totalAppointments": 25,
+    "todayAppointments": 3,
+    "upcomingAppointments": 8,
+    "completedAppointments": 15,
+    "pendingAppointments": 5,
+    "totalEarnings": 7500.00
+  },
+  "timestamp": "2026-06-11T10:46:00"
+}
+```
+
+**cURL:**
+```bash
+curl -X GET http://localhost:8080/api/doctor/dashboard \
+  -H "Authorization: Bearer YOUR_DOCTOR_ACCESS_TOKEN"
+```
+
+---
+
+## Summary of Endpoints
+
+### Authentication (5 endpoints)
+- GET `/api/auth/test` - Health check
+- POST `/api/auth/register/patient` - Register patient
+- POST `/api/auth/register/doctor` - Register doctor
+- POST `/api/auth/login` - User login
+- POST `/api/auth/refresh` - Refresh token
+
+### Patient Module (6 endpoints)
+- GET `/api/patient/profile` - Get profile
+- PUT `/api/patient/profile` - Update profile
+- GET `/api/patient/doctors` - List doctors
+- GET `/api/patient/doctors/search` - Search doctors
+- GET `/api/patient/doctors/{id}` - Get doctor details
+- GET `/api/patient/dashboard` - Get dashboard
+
+### Doctor Module (12 endpoints)
+- GET `/api/doctor/profile` - Get profile
+- PUT `/api/doctor/profile` - Update profile
+- POST `/api/doctor/slots` - Create time slot
+- GET `/api/doctor/slots` - Get all slots
+- GET `/api/doctor/slots/available` - Get available slots
+- DELETE `/api/doctor/slots/{id}` - Delete slot
+- GET `/api/doctor/appointments` - Get all appointments
+- GET `/api/doctor/appointments/today` - Today's appointments
+- GET `/api/doctor/appointments/upcoming` - Upcoming appointments
+- GET `/api/doctor/appointments/{id}` - Get appointment
+- PUT `/api/doctor/appointments/{id}/status` - Update status
+- GET `/api/doctor/dashboard` - Get dashboard
+
+**Total Endpoints**: 23 endpoints
+
+---
+
+## Testing Workflow Example
+
+### 1. Register & Login as Doctor
+```bash
+# Register
+curl -X POST http://localhost:8080/api/auth/register/doctor \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": "Dr. Sarah Smith",
+    "email": "sarah.doctor@example.com",
+    "password": "password123",
+    "phone": "9876543211",
+    "specialization": "Cardiologist",
+    "experience": 10,
+    "qualification": "MBBS, MD",
+    "consultationFee": 500
+  }'
+
+# Save the accessToken from response
+# Note: Doctor needs admin approval before creating slots
+```
+
+### 2. View Doctor Profile
+```bash
+curl -X GET http://localhost:8080/api/doctor/profile \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+### 3. Create Time Slots (after approval)
+```bash
+curl -X POST http://localhost:8080/api/doctor/slots \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "date": "2026-06-20",
+    "startTime": "09:00:00",
+    "endTime": "10:00:00"
+  }'
+```
+
+### 4. View Dashboard
+```bash
+curl -X GET http://localhost:8080/api/doctor/dashboard \
+  -H "Authorization: Bearer YOUR_ACCESS_TOKEN"
+```
+
+---
+
+## Phase 5 Complete! ✅
+
+All doctor module endpoints are ready for testing. The system now supports:
+- ✅ Doctor profile management
+- ✅ Time slot creation & management
+- ✅ Appointment viewing & status updates
+- ✅ Dashboard with statistics and earnings

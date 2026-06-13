@@ -1,7 +1,7 @@
 # MediPay - Progress Tracker
 
-**Last Updated**: Phase 4 Completion  
-**Overall Progress**: 29% (4/14 phases)
+**Last Updated**: Phase 5 Completion  
+**Overall Progress**: 36% (5/14 phases)
 
 ---
 
@@ -13,7 +13,7 @@
 | Phase 2 | ✅ | 24 files | ~1,850 | Day 1 |
 | Phase 3 | ✅ | 13 files | ~1,400 | Day 1 |
 | Phase 4 | ✅ | 6 files | ~600 | Day 1 |
-| Phase 5 | ⏳ | - | - | Pending |
+| Phase 5 | ✅ | 10 files | ~900 | Day 1 |
 | Phase 6 | ⏳ | - | - | Pending |
 | Phase 7 | ⏳ | - | - | Pending |
 | Phase 8 | ⏳ | - | - | Pending |
@@ -108,16 +108,16 @@
 ## 📈 Cumulative Statistics
 
 ### Backend Development
-- **Total Files**: 43 Java files
-- **Total LOC**: ~3,850 lines
+- **Total Files**: 53 Java files
+- **Total LOC**: ~4,750 lines
 - **Packages**: 8 packages
 - **Entities**: 7 entities
 - **Repositories**: 7 repositories
-- **Services**: 3 services
-- **Controllers**: 2 controllers
-- **DTOs**: 9 DTOs
+- **Services**: 4 services
+- **Controllers**: 3 controllers
+- **DTOs**: 16 DTOs
 - **Config Files**: 4 config classes
-- **API Endpoints**: 11 endpoints
+- **API Endpoints**: 29 endpoints
 
 ### Documentation
 - **Design Docs**: 7 files
@@ -127,9 +127,9 @@
 - **Total Docs**: 22 files
 
 ### Overall Project
-- **Total Files**: 69 files (code + docs)
-- **Phases Complete**: 4/14 (29%)
-- **Backend Progress**: 50% (patient module done)
+- **Total Files**: 81 files (code + docs)
+- **Phases Complete**: 5/14 (36%)
+- **Backend Progress**: 65% (patient + doctor modules done)
 - **Frontend Progress**: 0% (starts Phase 8)
 
 ---
@@ -200,25 +200,59 @@
 
 ---
 
-## 🔄 Next Phase: Phase 5 - Doctor Module
+### Phase 5: Doctor Module
+**Status**: ✅ Complete  
+**Deliverables**: 10 files (~900 LOC)
+
+**What Was Built**:
+- Doctor service layer with 16 methods
+- Doctor controller with 12 endpoints
+- 7 DTOs (3 request, 4 response)
+- Profile management (get/update)
+- Time slot management (create/read/delete)
+- Appointment management (view/update status)
+- Doctor dashboard with statistics
+
+**API Endpoints Available**:
+- GET `/api/doctor/profile` - Get doctor profile
+- PUT `/api/doctor/profile` - Update profile
+- POST `/api/doctor/slots` - Create time slot
+- GET `/api/doctor/slots` - Get all time slots
+- GET `/api/doctor/slots/available` - Get available slots
+- DELETE `/api/doctor/slots/{id}` - Delete time slot
+- GET `/api/doctor/appointments` - Get all appointments
+- GET `/api/doctor/appointments/today` - Today's appointments
+- GET `/api/doctor/appointments/upcoming` - Upcoming appointments
+- GET `/api/doctor/appointments/{id}` - Get appointment by ID
+- PUT `/api/doctor/appointments/{id}/status` - Update status
+- GET `/api/doctor/dashboard` - Get dashboard statistics
+
+**Features**:
+- Time slot overlap detection
+- Approval status verification
+- Appointment status workflow
+- Ownership verification
+- Dashboard analytics with earnings
+- JWT authentication required
+
+---
+
+## 🔄 Next Phase: Phase 6 - Payment Integration
 
 ### Planned Deliverables
-- Patient service layer
-- Patient controller
-- Patient DTOs
-- Doctor listing endpoint
-- Doctor search by specialization
-- Doctor profile view
-- Patient profile management
-- Patient dashboard data
+- Razorpay integration
+- Payment order creation
+- Payment verification
+- Payment history
+- Transaction records
+- Refund handling
 
 ### Estimated Files
-- PatientService.java
-- PatientController.java
-- DoctorResponse.java
-- PatientProfileResponse.java
-- PatientUpdateRequest.java
-- ~8-10 new files
+- PaymentService.java
+- PaymentController.java
+- Payment DTOs
+- Razorpay configuration
+- ~6-8 new files
 
 ---
 
@@ -371,10 +405,10 @@ To continue development:
 4. Check database seeding
 5. Start Phase 4 - Patient Module
 
-**Command to start Phase 4**: Type "phase 4" or "move to phase 4"
+**Command to start Phase 6**: Type "phase 6" or "move to phase 6"
 
 ---
 
-**Current Status**: Phase 4 Complete ✅  
-**Next Phase**: Phase 5 - Doctor Module 🔄  
-**Progress**: 29% Complete (4/14 phases)
+**Current Status**: Phase 5 Complete ✅  
+**Next Phase**: Phase 6 - Payment Integration 🔄  
+**Progress**: 36% Complete (5/14 phases)
